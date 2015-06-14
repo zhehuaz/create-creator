@@ -12,6 +12,7 @@ Assignment publish.
 -	Structure of directory is not restricted. It depends on the IDE you use.
 -	The function of your program is unlimited.Just try your best!  ;-D
 -	Readme required.
+	
 >	Hint: Mind your code style.
 	
 	
