@@ -7,7 +7,7 @@ using System.Timers;
 
 namespace HappyFactory.component
 {
-    class Job
+    public class Job
     {
         static int num = 0;
         public readonly int id;
@@ -19,7 +19,7 @@ namespace HappyFactory.component
         /// </summary>
         public readonly int difficulty;
 
-        Job(int difficulty)
+        public Job(int difficulty)
         {
             this.id = num ++;
             this.difficulty = difficulty;

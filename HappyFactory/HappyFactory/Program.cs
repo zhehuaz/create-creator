@@ -10,7 +10,21 @@ namespace HappyFactory
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello");
+            try
+            {
+                Factory factory = new Factory.Builder()
+                    .SetTruck()
+                    .AddMachine(10)
+                    .AddMachine(10)
+                    .AddMachine(1)
+                    .SetRepo()
+                    .Build();
+                factory.StartToWork();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
         }
     }
 }

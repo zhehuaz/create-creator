@@ -42,14 +42,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="component\Alarm.cs" />
-    <Compile Include="component\FirstMachine.cs" />
     <Compile Include="component\IAmountListened.cs" />
-    <Compile Include="component\IProcessListened.cs" />
+    <Compile Include="component\ISubmitListened.cs" />
     <Compile Include="component\Job.cs" />
     <Compile Include="component\Machine.cs" />
     <Compile Include="component\Procedure.cs" />
     <Compile Include="component\Repo.cs" />
     <Compile Include="component\Truck.cs" />
+    <Compile Include="exception\NoTruckException.cs" />
+    <Compile Include="exception\RepoAlreadySetException.cs" />
     <Compile Include="Factory.cs" />
     <Compile Include="painter\Painter.cs" />
     <Compile Include="Program.cs" />

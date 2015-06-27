@@ -6,21 +6,21 @@ using System.Threading.Tasks;
 
 namespace HappyFactory.component
 {
-    public delegate void AmountExceededEventHandler(Object sender, AmountExceededEventArgs args);
+    public delegate void AmountEventHandler(Object sender, AmountEventArgs args);
 
-    public class AmountExceededEventArgs : EventArgs 
+    public class AmountEventArgs : EventArgs 
     {
         public readonly int amount;
 
-        public AmountExceededEventArgs(int amount)
+        public AmountEventArgs(int amount)
         {
             this.amount = amount;
         }
     }
 
-    interface IAmountListened
+    public interface IAmountListened
     {
-        event AmountExceededEventHandler AmountExceeded;
-        void OnAmountExceeded(AmountExceededEventArgs args);
+        event AmountEventHandler Amount;
+        void OnAmountAlert(AmountEventArgs args);
     }
 }
