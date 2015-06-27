@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HappyFactory.exception
+namespace HappyFactory.Exceptions
 {
     /// <summary>
     /// Repo is supposed to set after all the machines.

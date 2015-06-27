@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Timers;
 
-namespace HappyFactory.component
+namespace HappyFactory.Component
 {
     public class Job
     {

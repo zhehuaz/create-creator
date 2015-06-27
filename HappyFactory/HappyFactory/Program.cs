@@ -19,7 +19,7 @@ namespace HappyFactory
                     .AddMachine(1)
                     .SetRepo()
                     .Build();
-                factory.StartToWork();
+                factory.Run();
             }
             catch (Exception e)
             {

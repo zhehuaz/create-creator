@@ -1,32 +1,58 @@
-﻿using HappyFactory.component;
+﻿using HappyFactory.Component;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using HappyFactory.exception;
+using HappyFactory.Exceptions;
 
 namespace HappyFactory
 {
+    /// <summary>
+    /// The factory contains a truck, several machines and a repo.
+    /// 
+    /// The factory is set using builder pattern.
+    /// Builder is prepared to initialize the factory.
+    /// </summary>
     public class Factory
     {
+        /// <summary>
+        /// Machines in the factory.
+        /// </summary>
         List<Machine> Machines { get; set; }
+
+        /// <summary>
+        /// Truck to deliver job resources.
+        /// </summary>
         Truck _deliveryTruck = null;
         Truck DeliveryTruck 
         { 
             get { return _deliveryTruck; }
             set { _deliveryTruck = value; }
         }
+
+        /// <summary>
+        /// Repo to store jobs.
+        /// </summary>
         Repo _storeRepo = null;
         Repo StoreRepo
         {
             get { return _storeRepo; }
             set { _storeRepo = value; }
         }
+
+        /// <summary>
+        /// Show alarm when amount is out of boundary.
+        /// </summary>
         Alarm alarm;
 
-        public void StartToWork()
+        private Factory() { }
+
+        /// <summary>
+        /// Make the factory run.
+        /// </summary>
+        public void Run()
         {
             DeliveryTruck.StartToDeliver();
         }
@@ -81,7 +107,7 @@ namespace HappyFactory
             }
 
             /// <summary>
-            /// Set a truck to deliver resources in the factory.
+            /// Set a truck to deliver resources in the factory.<br>
             /// <b>ATTENTION</b> : There should only be one truck in the factory, 
             /// which means this function is supposed to be called no
             /// more than once.If more, only the first one is set.
@@ -101,7 +127,7 @@ namespace HappyFactory
             /// 
             /// <b>ATTENTION</b> : There should only be one truck in the factory,
             /// which means this function is supposed to be called no
-            /// more than once.If more, only the first one is set.
+            /// more than once.If more, only the first one is set.<br>
             /// <b>ATTENTION</b> : Repo should be set at last (after all )
             /// </summary>
             /// <returns> Builder itself.</returns>
@@ -114,6 +140,10 @@ namespace HappyFactory
                 return this;
             }
 
+            /// <summary>
+            /// Build the Factory with params set.
+            /// </summary>
+            /// <returns></returns>
             public Factory Build()
             {
                 return factory;
