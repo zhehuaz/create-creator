@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Threading;
+using HappyFactory.Paint;
 
 namespace HappyFactory.Component
 {
@@ -24,13 +25,17 @@ namespace HappyFactory.Component
             while (Thread.CurrentThread.IsAlive)
             {
                 Thread.Sleep(rand.Next(700, 2000));
-                OnSubmit(new SubmitEventArgs(new Job(rand.Next(1000, 5000))));
+                OnSubmit(new SubmitEventArgs(new Job(rand.Next(1000, 3000))));
             }
         }
 
         public void OnSubmit(SubmitEventArgs args)
         {
-            Console.WriteLine("Dee~~ New job " + args.job.id + " comes!");
+            object obLock = new object();
+            lock (obLock)
+            {
+                Painter.Notif("Dee~~ New job " + args.job.id + " comes!");
+            }
             if (Submit != null)
             {
                 Submit(this, args);

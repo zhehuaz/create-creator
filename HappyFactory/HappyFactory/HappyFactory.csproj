@@ -57,7 +57,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Component\Alarm.cs" />
     <Compile Include="Component\IAmountListened.cs" />
     <Compile Include="Component\ISubmitListened.cs" />
     <Compile Include="Component\Job.cs" />
@@ -68,7 +67,8 @@
     <Compile Include="Exceptions\NoTruckException.cs" />
     <Compile Include="Exceptions\RepoAlreadySetException.cs" />
     <Compile Include="Factory.cs" />
-    <Compile Include="Painter\Painter.cs" />
+    <Compile Include="Paint\Painter.cs" />
+    <Compile Include="Paint\Position.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

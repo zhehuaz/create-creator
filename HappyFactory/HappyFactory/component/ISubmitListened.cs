@@ -18,7 +18,15 @@ namespace HappyFactory.Component
     /// </summary>
     public class SubmitEventArgs : EventArgs
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public readonly Job job;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="job"></param>
         public SubmitEventArgs(Job job) {
             this.job = job;
         }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HappyFactory.Paint;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,11 +15,13 @@ namespace HappyFactory
             {
                 Factory factory = new Factory.Builder()
                     .SetTruck()
-                    .AddMachine(10)
-                    .AddMachine(10)
-                    .AddMachine(1)
+                    .AddMachine(3)
+                    .AddMachine(2)
+                    .AddMachine(2)
+                    .AddMachine(2)
                     .SetRepo()
                     .Build();
+                Painter painter = new Painter(factory);
                 factory.Run();
             }
             catch (Exception e)

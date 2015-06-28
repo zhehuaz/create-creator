@@ -4,15 +4,29 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Threading;
+using HappyFactory.Paint;
 
 namespace HappyFactory.Component
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public enum MachineState
     {
+        /// <summary>
+        /// 
+        /// </summary>
         IDLE,
+
+        /// <summary>
+        /// 
+        /// </summary>
         BUSY
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     public class Machine : IAmountListened, ISubmitListened
     {
         private const int QUEUE_MAX_CONTAIN = 5;
@@ -26,14 +40,35 @@ namespace HappyFactory.Component
         /// The strength is supposed to be between 0 and 10.
         /// </summary>
         public readonly int strength;
+
+        /// <summary>
+        /// 
+        /// </summary>
         public MachineState state { get; set; }
         Thread workingThread;
-        Queue<Job> waitingJobs;
 
+        /// <summary>
+        /// 
+        /// </summary>
+        public Queue<Job> waitingJobs
+        {
+            get;
+            private set;
+        }
+        ///
+        public Position Pos { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
         public event AmountEventHandler Amount;
+        
+        /// <summary>
+        /// 
+        /// </summary>
         public event SubmitEventHandler Submit;
 
-        public Machine(int strength, ISubmitListened lastMachine)
+        public Machine(int strength, Position pos, ISubmitListened lastMachine)
         {
             this.id = num ++;
             this.strength = strength;
@@ -83,12 +118,17 @@ namespace HappyFactory.Component
         private void process(Job job)
         {
             this.state = MachineState.BUSY;
-            Console.WriteLine("Machine " + id + " is processing job " + job.id + " ...");
+            object obLock = new object();
+            Painter.Notif("Machine " + id + " is processing job " + job.id + " ...");
             Thread.Sleep(job.difficulty / strength);
-            //Console.WriteLine("Machine " + id + " process job " + job.id + " complete!");
             this.state = MachineState.IDLE;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="args"></param>
         public void OnNewJobReach(Object sender, SubmitEventArgs args)
         {
             if (args.job != null)

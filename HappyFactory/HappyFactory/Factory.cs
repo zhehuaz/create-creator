@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using HappyFactory.Exceptions;
+using HappyFactory.Paint;
 
 namespace HappyFactory
 {
@@ -20,7 +21,7 @@ namespace HappyFactory
         /// <summary>
         /// Machines in the factory.
         /// </summary>
-        List<Machine> Machines { get; set; }
+        public List<Machine> Machines { get; set; }
 
         /// <summary>
         /// Truck to deliver job resources.
@@ -47,6 +48,14 @@ namespace HappyFactory
         /// </summary>
         Alarm alarm;
 
+        /// <summary>
+        /// To draw the elements in factory.
+        /// </summary>
+        Painter Display { get; set; }
+
+        public delegate void OnStartEventHandler(Object sender, EventArgs args);
+        public event OnStartEventHandler OnStart;
+
         private Factory() { }
 
         /// <summary>
@@ -54,6 +63,7 @@ namespace HappyFactory
         /// </summary>
         public void Run()
         {
+            OnStart(this, null);
             DeliveryTruck.StartToDeliver();
         }
 
@@ -68,6 +78,7 @@ namespace HappyFactory
             {
                 factory = new Factory();
                 factory.alarm = new Alarm();
+                factory.Display = null;
             }
 
             /// <summary>
@@ -88,14 +99,14 @@ namespace HappyFactory
                     factory.Machines = new List<Machine>();
                     if (factory.DeliveryTruck != null)
                     {
-                        newMachine = new Machine(strength, factory.DeliveryTruck);
+                        newMachine = new Machine(strength, new Position(10,20), factory.DeliveryTruck);
                     }
                     else
                         throw new NoTruckException();
                 }
                 else
                 {
-                    newMachine = new Machine(strength, factory.Machines.Last());
+                    newMachine = new Machine(strength, new Position(5 * factory.Machines.Count, 20), factory.Machines.Last());
                 }
 
                 if(newMachine != null) 
