@@ -14,18 +14,22 @@ namespace HappyFactory.Component
     public enum MachineState
     {
         /// <summary>
-        /// 
+        /// The job buff of this machine is empty, and the machine
+        /// is waiting for the coming one.
         /// </summary>
         IDLE,
 
         /// <summary>
-        /// 
+        /// Machine is handling and processing a job.
         /// </summary>
         BUSY
     }
 
     /// <summary>
-    /// 
+    /// A machine is to process jobs.
+    /// Each machine has a job buffer implemented with queue.
+    /// Jobs processed over by the last machine would be submitted to this one, 
+    /// and stored temporarily in the buffer.
     /// </summary>
     public class Machine : IAmountListened, ISubmitListened
     {
@@ -55,7 +59,10 @@ namespace HappyFactory.Component
             get;
             private set;
         }
-        ///
+        
+        /// <summary>
+        /// 
+        /// </summary>
         public Position Pos { get; set; }
 
         /// <summary>
@@ -71,7 +78,12 @@ namespace HappyFactory.Component
         public Machine(int strength, Position pos, ISubmitListened lastMachine)
         {
             this.id = num ++;
-            this.strength = strength;
+            if (strength > 10)
+                this.strength = 10;
+            else if (strength < 1)
+                this.strength = 1;
+            else
+                this.strength = strength;
             this.state = MachineState.IDLE;
             this.waitingJobs = new Queue<Job>();
             waitingJobs.Clear();
@@ -118,14 +130,14 @@ namespace HappyFactory.Component
         private void process(Job job)
         {
             this.state = MachineState.BUSY;
-            object obLock = new object();
             Painter.Notif("Machine " + id + " is processing job " + job.id + " ...");
             Thread.Sleep(job.difficulty / strength);
             this.state = MachineState.IDLE;
         }
 
         /// <summary>
-        /// 
+        /// Called when the job processed over by the last machine comes.
+        /// The new job would be stored in the buffer queue.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="args"></param>
